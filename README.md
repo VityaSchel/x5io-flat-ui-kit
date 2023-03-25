@@ -24,7 +24,7 @@
 
 Пример:
 ```tsx
-import Button from '@x5io/flat-uikit/Button'
+import Button from '@x5io/flat-uikit/dist/Button'
 
 <Button onClick={() => alert('foobar')}>Hello world!</Button>
 ```
@@ -63,7 +63,7 @@ const [isChecked, setIsChecked] = React.useState(false)
 
 Пример:
 ```tsx
-import Input from '@x5io/flat-uikit/Input'
+import Input from '@x5io/flat-uikit/dist/Input'
 
 const [value, setValue] = React.useState('')
 
@@ -78,4 +78,4 @@ const [value, setValue] = React.useState('')
 
 1. Прочитайте общие инструкции в <https://gitlab.com/x5.io_npmjs_components/getting-started>
 2. Сборка с TypeScript: `npm run build`
-3. (Не рекомендуется) Сборка, игнорируя ошибки tsc: `npx vite build`
+3. (Не рекомендуется) Сборка, игнорируя ошибки tsc: `node build.mjs`

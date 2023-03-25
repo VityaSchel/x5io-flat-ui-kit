@@ -64,7 +64,7 @@ const promises = await Promise.all(
 )
 
 imports.forEach(item => {
-  fs.writeFileSync('dist/' + item.name + '/package.json', JSON.stringify({
+  fs.writeFileSync('./dist/' + item.name + '/package.json', JSON.stringify({
     'main': './index.umd.js',
     'module': './index.es.js',
     'types': './index.d.ts',
