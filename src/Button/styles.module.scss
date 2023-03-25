@@ -1,0 +1,13 @@
+$accent: rgba(60, 81, 255, 1);
+
+.button {
+  background: $accent;
+  border-radius: 100px !important;
+  align-self: center;
+  padding: 21.5px 40px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  line-height: 21px !important;
+  letter-spacing: 0.02em !important;
+}

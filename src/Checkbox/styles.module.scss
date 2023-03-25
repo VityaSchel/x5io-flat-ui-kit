@@ -1,0 +1,103 @@
+@use 'sass:color';
+
+$accent: rgba(60, 81, 255, 1);
+
+.checkboxContainer {
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
+
+  .checkbox {
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+    align-items: flex-start;
+    $size: 20px;
+    cursor: pointer;
+
+    & {
+      display: block;
+      position: relative;
+      padding-left: $size + 15px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    /* скрываем дефолтный флажок */
+    & input {
+      position: absolute;
+      opacity: 0;
+    }
+    /* Создаем кастомный checkbox */
+    span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: $size;
+      width: $size;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #fff;
+      border: 1px solid rgba(59, 65, 105, 0.12);
+      $animationDuration: 100ms;
+      transition: background-color #{$animationDuration} ease-in-out, border-color #{$animationDuration} ease-in-out;
+      margin-top: 4px;
+    }
+    /* При наведении указателя мыши перекрашиваем */
+    &:hover input ~ span {
+      background-color: color.scale(#fff, $lightness: -1%);
+    }
+    /* Когда отмечен, то красим в зеленый цвет */
+    & input:checked ~ span {
+      background-color: color.scale($accent, $alpha: -85%);
+      border-color: transparent;
+    }
+    /* Создаем когда отмечено (не видно, когда не отмечено) */
+    span:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+    /* Показываем когда отмечен */
+    & input:checked ~ span:after {
+      display: block;
+    }
+    /* Стили индикатора */
+    & span:after {
+      left: 6px;
+      top: 3px;
+      width: 7px;
+      height: 10px;
+      border: 1px solid $accent;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    label {
+      font-family: 'Golos Text';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      letter-spacing: 0.02em;
+      color: rgba(46, 55, 85, 0.35);
+      width: 398px;
+      display: block;
+      cursor: pointer;
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        font-size: 12px;
+        line-height: 18px;
+      }
+    }
+  }
+
+  .error {
+    margin-top: 10px;
+  }
+}
