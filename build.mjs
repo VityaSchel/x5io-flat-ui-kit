@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import vue from '@vitejs/plugin-vue'
 import { build } from 'vite'
 import { babel } from '@rollup/plugin-babel'
 import glob from 'fast-glob'
@@ -10,53 +9,70 @@ import dts from 'vite-plugin-dts'
 import svgr from 'vite-plugin-svgr'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 
-const imports = []
 
 const getImports = async () => {
-  const files = await glob([path.resolve('../../components/**/package.json'), '!**/node_modules/**/*'])
+  const imports = []
+  const files = await glob(['./src/**/package.json', '!**/node_modules/**/*'])
   files.forEach(file => {
     const content = fs.readFileSync(file, 'utf-8')
     const pkg = JSON.parse(content)
-    if (pkg.imports) {
-      imports.push({
-        name: pkg.name,
-        lib: path.resolve(file, '../', pkg.imports.lib),
-        style: path.resolve(file, '../', pkg.imports.style)
-      })
-    }
+    imports.push({
+      name: pkg.name,
+      lib: path.resolve(file, '../index.tsx'),
+      style: path.resolve(file, '../styles.module.scss')
+    })
+    // if (pkg.imports) {
+    // }
   })
+  return imports
 }
 
-await getImports()
+const imports = await getImports()
 
-imports.forEach(async item => {
-  await build({
-    configFile: false,
-    build: {
-      lib: {
-        entry: item.lib,
-        name: item.name
-      },
-      rollupOptions: {
-        external: ['react', 'react-dom'],
-        output: {
-          globals: {
-            react: 'React',
-            'react-dom': 'ReactDOM'
-          },
-          assetFileNames: `${item.name}/[name].[ext]`,
-          entryFileNames: () => '[name]/[name].[format].js'
+const promises = await Promise.all(
+  imports.map(async item => {
+    return await build({
+      configFile: false,
+      build: {
+        lib: {
+          entry: item.lib,
+          name: item.name
+        },
+        rollupOptions: {
+          external: ['react', 'react-dom'],
+          output: {
+            globals: {
+              react: 'React',
+              'react-dom': 'ReactDOM'
+            },
+            assetFileNames: `${item.name}/[name].[ext]`,
+            entryFileNames: () => `${item.name}/[name].[format].js`
+          }
         }
-      }
-    },
-    plugins: [
-      svgr({exportAsDefault: true}),
-      cssInjectedByJsPlugin(),
-      react(),
-      dts({
-        insertTypesEntry: true,
-      }),
-      // vue(), babel({ babelHelpers: 'bundled' })
-    ]
+      },
+      plugins: [
+        svgr({exportAsDefault: true}),
+        cssInjectedByJsPlugin(),
+        react(),
+        dts({
+          insertTypesEntry: true,
+        }),
+        // vue(), babel({ babelHelpers: 'bundled' })
+      ]
+    })
   })
+)
+
+imports.forEach(item => {
+  fs.writeFileSync('dist/' + item.name + '/package.json', JSON.stringify({
+    'main': './index.umd.js',
+    'module': './index.es.js',
+    'types': './index.d.ts',
+    'exports': {
+      '.': {
+        'import': './index.es.js',
+        'require': './index.umd.js'
+      }
+    }
+  }), 'utf-8')
 })
