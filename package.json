@@ -2,7 +2,7 @@
   "name": "@x5io/flat-uikit",
   "author": "Viktor Shchelochkov <hi@hloth.dev> (https://hloth.dev/)",
   "description": "[x5.io React UI Kit] Реюзабельные компоненты \"Flat\" для интерфейса на React",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "scripts": {
     "dev": "vite",
     "build": "tsc && node build.mjs",
