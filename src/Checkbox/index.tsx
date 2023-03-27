@@ -1,5 +1,6 @@
 import { FormHelperText } from '@mui/material'
 import styles from './styles.module.scss'
+import cx from 'classnames'
 
 export default function Checkbox(props: Omit<
   React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
@@ -10,13 +11,13 @@ export default function Checkbox(props: Omit<
   return (
     <div className={styles.checkboxContainer}>
       <div className={styles.checkbox}>
-        <label htmlFor={props.name} >
+        <label htmlFor={props.name}>
           <input type='checkbox' id={props.name} defaultChecked={value} {...otherProps}></input>
           <span></span>
-          <div >{children}</div>
+          <div className={cx({ [styles.errorLabel]: props.error })}>{children}</div>
         </label>
       </div>
-      {props.error && <FormHelperText error className={styles.error}>{props.error}</FormHelperText>}
+      {props.error !== undefined && <FormHelperText error className={styles.error}>{props.error}</FormHelperText>}
     </div>
   )
 }
