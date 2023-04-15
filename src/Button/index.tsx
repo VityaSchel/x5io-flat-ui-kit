@@ -1,9 +1,19 @@
-import MUIButton, { ButtonProps } from '@mui/material/Button'
+import React from 'react'
 import styles from './styles.module.scss'
 import cx from 'classnames'
 
-export default function Button(props: ButtonProps) {
+export default function Button({ variant = 'contained', className, children, ...props }: React.PropsWithChildren<{
+  variant?: 'contained',
+  className?: cx.ArgumentArray
+}>) {
   return (
-    <MUIButton variant='contained' {...props} className={cx(styles.button, props.className)} />
+    <button
+      {...props}
+      className={cx(styles.button, {
+        [styles.contained]: variant === 'contained'
+      }, className)}
+    >
+      {children}
+    </button>
   )
 }

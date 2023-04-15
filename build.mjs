@@ -9,7 +9,6 @@ import dts from 'vite-plugin-dts'
 import svgr from 'vite-plugin-svgr'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 
-
 const getImports = async () => {
   const imports = []
   const files = await glob(['./src/**/package.json', '!**/node_modules/**/*'])
@@ -21,19 +20,19 @@ const getImports = async () => {
       lib: path.resolve(file, '../index.tsx'),
       style: path.resolve(file, '../styles.module.scss')
     })
-    // if (pkg.imports) {
-    // }
   })
   return imports
 }
 
 const imports = await getImports()
 
-const promises = await Promise.all(
-  imports.map(async item => {
-    return await build({
+// for(const item of imports) {
+await Promise.all(
+  imports.map(item => {
+    return build({
       configFile: false,
       build: {
+        emptyOutDir: false,
         lib: {
           entry: item.lib,
           name: item.name

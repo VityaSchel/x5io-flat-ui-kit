@@ -1,3 +1,6 @@
 {
-  "name": "Input"
+  "name": "input",
+  "dependencies": {
+    "@mui/material": "^5.12.0"
+  }
 }

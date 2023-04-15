@@ -24,29 +24,33 @@
 
 Пример:
 ```tsx
-import Button from '@x5io/flat-uikit/dist/Button'
+import Button from '@x5io/flat-uikit/dist/button'
 
 <Button onClick={() => alert('foobar')}>Hello world!</Button>
 ```
 
 ### Чекбокс (Checkbox)
 
-| Проп                           | Тип     | Описание            |
-| ------------------------------ | ------- | ------------------- |
-| value                          | boolean | Отмечен ли чекбокс  |
-| name                           | string  | Название, html проп |
-| error                          | string? | Ошибка поля         |
-| [все остальные HTML-аттрибуты] | -       | -                   |
+![Checkbox UI component demo](./readme_assets/checkbox.png)
+
+| Проп                           | Тип     | Описание                   |
+| ------------------------------ | ------- | -------------------------- |
+| value                          | boolean | Отмечен ли чекбокс         |
+| name                           | string  | Название, html проп        |
+| error                          | string? | Ошибка поля                |
+| maxWidth                       | number? | Максимальная длина надписи |
+| [все остальные HTML-аттрибуты] | -       | -                          |
 
 Пример:
 ```tsx
-import Checkbox from '@x5io/flat-uikit/Checkbox'
+import Checkbox from '@x5io/flat-uikit/checkbox'
 
 const [isChecked, setIsChecked] = React.useState(false)
 
 <Checkbox 
   value={isChecked} 
   onChange={setIsChecked}
+  maxWidth={398}
   error={!isChecked && 'Отметьте поле'}
 >
   Подпись к чекбоксу
@@ -55,15 +59,17 @@ const [isChecked, setIsChecked] = React.useState(false)
 
 ### Поле для ввода (Input)
 
-| Проп                                   | Тип                                             | Описание                                           |
-| -------------------------------------- | ----------------------------------------------- | -------------------------------------------------- |
-| error                                  | string?                                         | Ошибка поля                                        |
-| onEnter                                | (e: React.KeyboardEvent<HTMLDivElement>) => any | Обязательное событие, если нажимается кнопка Enter |
-| [все остальные пропы от MUI/TextField] | -                                               | -                                                  |
+![Input UI component demo](./readme_assets/input.png)
+
+| Проп                                   | Тип                                              | Описание                              |
+| -------------------------------------- | ------------------------------------------------ | ------------------------------------- |
+| error                                  | string?                                          | Ошибка поля                           |
+| onEnter                                | (e: React.KeyboardEvent<HTMLDivElement>)? => any | Событие, если нажимается кнопка Enter |
+| [все остальные пропы от MUI/TextField] | -                                                | -                                     |
 
 Пример:
 ```tsx
-import Input from '@x5io/flat-uikit/dist/Input'
+import Input from '@x5io/flat-uikit/dist/input'
 
 const [value, setValue] = React.useState('')
 

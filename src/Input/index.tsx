@@ -1,10 +1,12 @@
+// import React from 'react'
 import styles from './styles.module.scss'
 import TextField, { TextFieldProps } from '@mui/material/TextField'
 import { FormHelperText } from '@mui/material'
 
-export default function Input(props: Omit<TextFieldProps, 'error'> & { error?: string, onEnter: (e: React.KeyboardEvent<HTMLDivElement>) => any }) {
-  const { error, ...textFieldProps } = props
-
+export default function Input({ error, onEnter, ...textFieldProps }: Omit<TextFieldProps, 'error'> & { 
+  error?: string
+  onEnter?: (e: React.KeyboardEvent<HTMLDivElement>) => any
+}) {
   return (
     <div className={styles.input}>
       <TextField
@@ -14,14 +16,14 @@ export default function Input(props: Omit<TextFieldProps, 'error'> & { error?: s
         error={Boolean(error)}
         onKeyDown={e => {
           if(e.key === 'Enter') {
-            props.onEnter?.(e)
+            onEnter?.(e)
           }
         }}
         {...textFieldProps}
       />
-      {props.error && (
+      {error && (
         <div className={styles.error}>
-          <FormHelperText error>{props.error}</FormHelperText>
+          <FormHelperText error>{error}</FormHelperText>
         </div>
       )}
     </div>

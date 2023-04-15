@@ -1,1 +1,1 @@
-throw new Error('Use `node build.mjs`')
+throw new Error('Use `npm run build`')
