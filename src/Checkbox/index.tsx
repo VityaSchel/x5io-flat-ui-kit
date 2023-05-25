@@ -3,7 +3,7 @@ import { FormHelperText } from '@mui/material'
 import styles from './styles.module.scss'
 import cx from 'classnames'
 
-export default function Checkbox({ value, name, error, children, maxWidth, ...otherProps }: Omit<React.InputHTMLAttributes<HTMLInputElement>, 'dangerouslySetInnerHTML'> & React.PropsWithChildren<{ 
+export default function Checkbox({ value, name, error, children, maxWidth, ...otherProps }: Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'dangerouslySetInnerHTML'> & React.PropsWithChildren<{ 
   value: boolean
   name: string
   error: string | undefined
