@@ -1,0 +1,28 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.orange-button {
+  --accent: orange;
+}
+
+.components-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.components-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 600px;
+  max-width: 100%;
+}
