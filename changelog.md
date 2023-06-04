@@ -3,6 +3,10 @@
 Авторы:
 - [Виктор Щелочков (hloth) \<x5io@hloth.dev\>](https://github.com/VityaSchel)
 
+## 1.1.3
+
+- Пробуем снова фиксить проп value
+
 ## 1.1.2
 
 - Фикс чекбокса (проп value)

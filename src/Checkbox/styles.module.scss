@@ -8,31 +8,21 @@ $accent: rgba(60, 81, 255, 1);
   }
 
   .checkbox {
-    display: flex;
-    flex-direction: row;
-    gap: 28px;
-    align-items: flex-start;
     $size: 20px;
     cursor: pointer;
+    display: block;
+    position: relative;
+    padding-left: $size + 15px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
 
-    & {
-      display: block;
-      position: relative;
-      padding-left: $size + 15px;
-      margin-bottom: 12px;
-      cursor: pointer;
-      font-size: 22px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    /* скрываем дефолтный флажок */
-    & input {
+    input {
       position: absolute;
       opacity: 0;
     }
-    /* Создаем кастомный checkbox */
+
     span {
       position: absolute;
       top: 0;
@@ -47,27 +37,27 @@ $accent: rgba(60, 81, 255, 1);
       transition: background-color #{$animationDuration} ease-in-out, border-color #{$animationDuration} ease-in-out;
       margin-top: 4px;
     }
-    /* При наведении указателя мыши перекрашиваем */
-    &:hover input ~ span {
-      background-color: color.scale(#fff, $lightness: -1%);
+
+    &:hover span {
+      background-color: color.scale(#fff, $lightness: -5%);
     }
-    /* Когда отмечен, то красим в зеленый цвет */
-    & input:checked ~ span {
+
+    input[checked] ~ span {
       background-color: color.scale($accent, $alpha: -85%);
       border-color: transparent;
     }
-    /* Создаем когда отмечено (не видно, когда не отмечено) */
+
     span:after {
       content: "";
       position: absolute;
       display: none;
     }
-    /* Показываем когда отмечен */
-    & input:checked ~ span:after {
+
+    input[checked] ~ span:after {
       display: block;
     }
-    /* Стили индикатора */
-    & span:after {
+
+    span:after {
       left: 6px;
       top: 3px;
       width: 5px;
